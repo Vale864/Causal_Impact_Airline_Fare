@@ -4,34 +4,39 @@
 
 **For a more detailed project summary with visualizations, please see airline_readme.ipynb**
 
-### 📌 Project Overview
-In 2012, Delta Airlines introduced "Basic Economy" fares—a restrictive fare class designed to compete with low-cost carriers like Spirit and Frontier without cannibalizing premium revenue.
+### Project Overview
+In 2012, Delta Airlines introduced "Basic Economy," a strategic segmentation product designed to compete with Low-Cost Carriers (LCCs) like Spirit without cannibalizing premium revenue.
 
-This project uses **Bayesian Causal Inference** to quantify the impact of this strategic decision on Delta's KPIs: yield, market share, and revenue. Unlike a standard A/B test, this policy was rolled out widely, making it an observational study requiring rigorous counterfactual modeling.
+This project employs Bayesian Causal Inference to quantify the financial impact of this decision. Unlike a standard A/B test, this policy was rolled out widely, making it a complex observational study requiring rigorous counterfactual modeling to isolate the true treatment effect from market noise.
 
-### ⭐️ STAR Breakdown
+### STAR Breakdown
 
 * **Situation:** The airline industry faced a paradigm shift in 2012 as legacy carriers struggled to compete with Low-Cost Carriers (LCCs) on price. Delta needed a way to segment price-sensitive customers without lowering prices across the board.
-* **Task:** My goal was to determine if the introduction of Basic Economy caused a statistically significant increase in the KPIs, or if observed growth was simply due to external market factors (e.g., post-recession recovery).
-* **Action:** 
-    * **Data Engineering:** Extracted and cleaned historical flight data from the US Department of Transportation's **DB1B (Airline Origin and Destination Survey)** dataset.
-    * **Modeling:** Implemented a **Bayesian Structural Time Series (BSTS)** and **Multivariate Synthetic Control (SCM)** model using **PyMC**.
-    * **Counterfactuals:** 
-      * For the SCM, a synthetic control group was used to create a weighted combination of competitor metrics (airlines that did not introduce Basic Economy at that time) to predict what Delta's KPIs *would have been* without the policy.
-      * For the BSTS, instead of creating a synthetic control from other routes, it creates a counterfactual solely based on the carrier's own pre-treatment history.
 
-* **Result:** The models demonstrated a clear divergence between the actual observed KPIs and the counterfactuals, indicating a positive causal effect attributable to the segmentation strategy. Additionally, the BSTS model demonstrates that the strategy successfully rebuffed the low-cost carriers' encroachment into Delta's market share.
+* **Task:** My objective was to rigorously determine if Basic Economy caused a statistically significant lift in Revenue and Yield, or if observed growth was merely a result of post-recession economic recovery.
 
-### 🛠 Tech Stack
+* **Action:**
+    * **Data Engineering:** Extracted and processed millions of rows of flight data from the US Department of Transportation's DB1B (Airline Origin and Destination Survey) dataset.
+    * **Modeling:** Implemented a Bayesian Structural Time Series (BSTS) model using PyMC to construct a dynamic counterfactual based on pre-treatment trends and seasonality.
+    * **Validation:** Utilized a Multivariate Synthetic Control (SCM) as a secondary validation method, creating a weighted "Synthetic Delta" from a donor pool of untreated competitor routes.
+
+* Result: The analysis confirmed the strategy was highly accretive and competitively effective. Results for the DTW-FLL route:
+    * **Revenue Lift:** Quantified a $1.8 Million cumulative revenue increase (Total Segment Revenue) over the treatment period against the counterfactual, with an average quarterly lift of ~$200,494.
+    * **Statistical Certainty:** The model produced a 100% Probability of Positive Impact, with the 94% High Density Interval (HDI) remaining strictly positive [$927k, $1.76M].
+    * **Competitive Defense:** Simultaneously identified a $0.63 Million revenue contraction for the primary competitor (Spirit) on the same route, proving the strategy successfully diverted price-sensitive demand away from the LCC.
+
+### Tech Stack
 * **Language:** Python 3.10+
 * **Libraries:** PyMC, ArviZ, Pandas, NumPy, Matplotlib/Seaborn
 * **Data Source:** US DOT DB1B Market Data
 
-### 🧠 Methodology Note
-Why **PyMC**? Standard regression techniques often fail to account for the temporal structure and evolving variance of airline data. By using a Bayesian approach, I generated **Credible Intervals** (uncertainty bands) around the impact estimates, providing a more robust risk assessment than simple point estimates alone.
+### Methodology Note
+Why **PyMC**? Standard regression techniques often fail to account for the temporal structure and evolving variance of airline data. By using a Bayesian approach, I was able to generate **Credible Intervals** (uncertainty bands) around the impact estimates, providing a more robust risk assessment than simple point estimates.
 
 ---
 *Author: Austin Woolston*
 *Connect with me on [LinkedIn](https://www.linkedin.com/in/austin-woolston-0a3a1a255/)*
+
+---
 
 ---
