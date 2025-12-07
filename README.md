@@ -14,7 +14,7 @@ This project employs Bayesian Causal Inference to quantify the financial impact 
 * **Action:**
     * **Data Engineering:** Extracted and processed millions of rows of flight data from the US Department of Transportation's DB1B (Airline Origin and Destination Survey) dataset.
     * **Modeling:** Implemented a Bayesian Structural Time Series (BSTS) model using PyMC to construct a dynamic counterfactual based on pre-treatment trends and seasonality.
-    * **Validation:** Utilized a Multivariate Synthetic Control (SCM) as a secondary validation method, creating a weighted "Synthetic Delta" from a donor pool of untreated competitor routes. Robustly controlling for economic confounders, the SCM model estimated a 3.6% lift in Yield while preserving Market Share (+0.43pp) averaged across all treated routes.
+    * **Validation:** Utilized a Multivariate Synthetic Control (SCM) as a secondary validation method, creating a weighted "Synthetic Delta" from a donor pool of untreated competitor routes. Robustly controlling for economic confounders, the SCM model estimated a 3.6% lift in yield while preserving market share (+0.43pp) averaged across all treated routes.
 
 * **Result:** The analysis confirmed the strategy was highly accretive and competitively effective. Results for the DTW-FLL route:
     * **Revenue Lift:** Estimated a 1.8 million cumulative revenue increase over the treatment period against the counterfactual, with an average quarterly lift of ~200,494k.
